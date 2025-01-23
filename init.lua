@@ -23,7 +23,7 @@ function M.setup(user_config)
         if user_config.format then M.config.format = user_config.format end
         if user_config.disallowed_extensions then M.config.disallowed_extensions = user_config.disallowed_extensions end
     end
-    vim.api.nvim_create_user_command('Fcomp', function()
+    vim.api.nvim_create_user_command('Neomap', function()
         M.generate()
     end, {})
 end

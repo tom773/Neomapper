@@ -62,7 +62,7 @@ require('neomapper').setup({
 After installation, use the command:
 
 ```vim
-:Fcomp
+:Neomap
 ```
 
 This will generate a `codebase.json` or `codebase.xml` file (depending on your configuration) in your current working directory.
