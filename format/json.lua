@@ -5,7 +5,6 @@ local M = {}
 local function pretty_json(obj, indent)
     indent = indent or ""
     local result = ""
-    
     if type(obj) == "table" then
         if vim.tbl_islist(obj) then
             -- Array
@@ -45,7 +44,7 @@ local function pretty_json(obj, indent)
 end
 
 function M.generate(config)
-    local current_dir = vim.fn.getcwd()
+    local current_dir = utils.find_project_root()
     local files = utils.scan_directory(current_dir, config)
     local codebase = {
         files = {}

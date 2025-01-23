@@ -14,7 +14,7 @@ local function xml_encode(str)
 end
 
 function M.generate(config)
-    local current_dir = vim.fn.getcwd()
+    local current_dir = utils.find_project_root()
     local files = utils.scan_directory(current_dir, config)
     local xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml_content = xml_content .. '<codebase>\n'
