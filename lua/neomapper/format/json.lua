@@ -1,4 +1,4 @@
-local utils = require('fcomp.utils')
+local utils = require('neomapper.utils')
 local M = {}
 
 -- Pretty print JSON with proper indentation

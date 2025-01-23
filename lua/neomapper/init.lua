@@ -38,9 +38,9 @@ end
 function M.generate()
     local formatter
     if M.config.format == "xml" then
-        formatter = require('fcomp.format.xml')
+        formatter = require('neomapper.format.xml')
     elseif M.config.format == "json" then
-        formatter = require('fcomp.format.json')
+        formatter = require('neomapper.format.json')
     else
         vim.notify('Invalid format specified. Use "xml" or "json"', vim.log.levels.ERROR)
         return
