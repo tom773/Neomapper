@@ -1,6 +1,22 @@
 
 local M = {}
 
+function M.find_project_root()
+    local current = vim.fn.getcwd()
+    local root_markers = {'.git', '.svn', '.hg', '.bzr', 'package.json', 'Cargo.toml', 'go.mod'}
+    while current ~= '/' do
+        for _, marker in ipairs(root_markers) do
+            if vim.fn.isdirectory(current .. '/' .. marker) == 1 or 
+               vim.fn.filereadable(current .. '/' .. marker) == 1 then
+                return current
+            end
+        end
+        current = vim.fn.fnamemodify(current, ':h')
+    end
+    -- If no root marker found, return current directory
+    return vim.fn.getcwd()
+end
+
 function M.is_excluded(path, config)
     for _, excluded in ipairs(config.exclude_dirs) do
         if path:match(excluded) then
