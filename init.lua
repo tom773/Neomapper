@@ -4,7 +4,7 @@ local M = {
 }
 
 local default_config = {
-    format = "xml",  -- can be "xml" or "json"
+    format = "json",  -- can be "xml" or "json"
     exclude_dirs = {".git", ".svn", ".hg", ".bzr", ".idea", ".vscode", ".DS_Store"},
     allowed_extensions = {".c", ".cpp", ".h", ".hpp", ".java", ".py", ".js", ".ts", ".html", ".css", ".scss",
     ".json", ".xml", ".yaml", ".yml", ".md", ".txt", ".sh", ".bat", ".ps1", ".lua", ".vim", ".sql", ".php", ".rb", ".pl", ".go"},
@@ -16,13 +16,12 @@ function M.setup(user_config)
     M.config.allowed_extensions = default_config.allowed_extensions
     M.config.exclude_dirs = default_config.exclude_dirs
     M.config.format = default_config.format
+    M.config.disallowed_extensions = default_config.disallowed_extensions
     if user_config then
         if user_config.allowed_extensions then M.config.allowed_extensions = user_config.allowed_extensions end
         if user_config.exclude_dirs then M.config.exclude_dirs = user_config.exclude_dirs end
         if user_config.format then M.config.format = user_config.format end
-    if user_config.disallowed_extensions then M.config.disallowed_extensions = user_config.disallowed_extensions end
-        else
-    M.config.disallowed_extensions = default_config.disallowed_extensions
+        if user_config.disallowed_extensions then M.config.disallowed_extensions = user_config.disallowed_extensions end
     end
     vim.api.nvim_create_user_command('Fcomp', function()
         M.generate()
