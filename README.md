@@ -1,4 +1,3 @@
-```markdown
 # neomapper.nvim
 
 A plugin for Neovim that generates a snapshot of your codebase in JSON or XML format
