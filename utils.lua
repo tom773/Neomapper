@@ -26,6 +26,16 @@ function M.is_excluded(path, config)
     return false
 end
 
+function M.is_excluded_file(path, config)
+    local filename = path:match("([^/]+)$")  -- Get just the filename from the path
+    for _, excluded in ipairs(config.exclude_files) do
+        if filename == excluded then  -- Exact match comparison
+            return true
+        end
+    end
+    return false
+end
+
 function M.is_allowed_extension(path, config)
     for _, ext in ipairs(config.disallowed_extensions) do
         if path:match(ext .. "$") then
@@ -73,6 +83,9 @@ function M.scan_directory(dir, config)
 
         local path = dir .. '/' .. name
         if not M.is_excluded(path, config) then
+            if M.is_excluded_file(path, config) then
+                goto continue_scan
+            end
             if type == 'directory' then
                 local sub_files = M.scan_directory(path, config)
                 for _, file in ipairs(sub_files) do
@@ -82,6 +95,7 @@ function M.scan_directory(dir, config)
                 table.insert(files, path)
             end
         end
+        ::continue_scan::
     end
     return files
 end
